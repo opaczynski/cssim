@@ -31,6 +31,14 @@ Information about updates will appear here.
 
 ---
 
+## [1.1.8] - 13.05.2026
+
+- A critical bug that prevented the program from processing files on Windows has been fixed.
+
+Get ready—a major update is coming!
+
+---
+
 ## [1.1.7] - 01.01.2026
 
 - Sometimes, complex tags were rendered incorrectly. A fix has been implemented to address this issue.
