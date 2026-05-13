@@ -233,7 +233,6 @@ function parseCSSContent(css) {
         atRule.walkRules(rule => {
             rule.selectors.forEach(sel => {
                 const trimmed = sel.trim();
-
                 // Obsługa :root → zamiana na html z klasą emulatora
                 if (trimmed === ':root') {
                     classSelectors.forEach(className => {
@@ -243,13 +242,13 @@ function parseCSSContent(css) {
                 }
 
                 // Rozpoznanie pseudoklasy/pseudoelementu na końcu
-                const pseudoMatch = last.match(/(:{1,2}[a-zA-Z0-9-()]+.*)?$/);
+                const pseudoMatch = trimmed.match(/(:{1,2}[a-zA-Z0-9-()]+.*)?$/);
                 let pseudo = '';
-                let element = last;
+                let element = trimmed;
 
                 if (pseudoMatch) {
                     pseudo = pseudoMatch[0] || '';
-                    element = last.slice(0, -pseudo.length).trim();
+                    element = trimmed.slice(0, -pseudo.length).trim();
                 }
 
                 // Pomijamy selektory, które są tylko pseudoelementem (np. ::-webkit-scrollbar-thumb)
