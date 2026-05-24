@@ -246,8 +246,8 @@ function parseCSSContent(css) {
                 let pseudo = '';
                 let element = trimmed;
 
-                if (pseudoMatch) {
-                    pseudo = pseudoMatch[0] || '';
+                if (pseudoMatch && pseudoMatch[0]) {
+                    pseudo = pseudoMatch[0];
                     element = trimmed.slice(0, -pseudo.length).trim();
                 }
 
@@ -356,7 +356,7 @@ function processEntries(entries, $, fileOutput) {
             const first = sel.trim().split('.emulator-')[0];
             return first;
         });
-        baseElements = [...new Set(baseElements)];
+        baseElements = [...new Set(baseElements)].filter(Boolean);
         fileOutput[className] = baseElements.join(', ');
         console.log(`        - The class ${className} has been assigned to the element: ${fileOutput[className]}`);
     }
