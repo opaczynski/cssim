@@ -20,3 +20,13 @@ iframe {
 svg#svg-container {
     display: none;
 }
+img#skin {
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    transform-origin: top left;
+}

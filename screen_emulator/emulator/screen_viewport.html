@@ -17,21 +17,41 @@
             let viewport_width;
             let window_height;
             let orientation;
-            const iframe = document.querySelector('#emulator_container iframe');
-            const emulator_container = document.getElementById('emulator_container');
-            window.addEventListener('message', event => {
+            const iframe = document.querySelector("#emulator_container iframe");
+            const emulator_container = document.getElementById("emulator_container");
+            window.addEventListener("message", (event) => {
                 const data = event.data;
-                mod = parseFloat(data['mod']);
-                if (data['inverted_colors'] == 'inverted') {
-                    iframe.style.filter = 'invert(100%)';
+                if (data.resize) {
+                    w = window_height;
+                    h = window_width;
+                    window_width = w;
+                    window_height = h;
+                    l = navigation_bar_top;
+                    r = navigation_bar_bottom;
+                    t = navigation_bar_right;
+                    b = navigation_bar_left;
+                    navigation_bar_left = l;
+                    navigation_bar_right = r;
+                    navigation_bar_top = t;
+                    navigation_bar_bottom = b;
+                    setViewport();
+                    return;
                 }
-                navigation_bar_left = parseFloat(data['navigation_bar_left']);
-                navigation_bar_right = parseFloat(data['navigation_bar_right']);
-                navigation_bar_top = parseFloat(data['navigation_bar_top']);
-                navigation_bar_bottom = parseFloat(data['navigation_bar_bottom']);
-                window_width = parseFloat(data['window_width']);
-                window_height = parseFloat(data['window_height']);
-                orientation = data['orientation'];
+                if (data.scripting == "none" && !data.url.startsWith("http://localhost/screen_emulator/render/")) {
+                    iframe.sandbox = "";
+                }
+                mod = parseFloat(data["mod"]);
+                if (data["inverted_colors"] == "inverted") {
+                    iframe.style.filter = "invert(100%)";
+                }
+                navigation_bar_left = parseFloat(data["navigation_bar_left"]);
+                navigation_bar_right = parseFloat(data["navigation_bar_right"]);
+                navigation_bar_top = parseFloat(data["navigation_bar_top"]);
+                navigation_bar_bottom = parseFloat(data["navigation_bar_bottom"]);
+                window_width = parseFloat(data["window_width"]);
+                window_height = parseFloat(data["window_height"]);
+                orientation = data["orientation"];
+                iframe.src = data["url"];
                 setViewport();
             });
             function setViewport() {
@@ -39,13 +59,12 @@
                 let h = window_height;
                 viewport_width = mod * w - navigation_bar_left - navigation_bar_right;
                 viewport_height = mod * h - navigation_bar_top - navigation_bar_bottom;
-                emulator_container.style.width = viewport_width + 'px';
-                emulator_container.style.height = viewport_height + 'px';
-                iframe.style.width = viewport_width + 'px';
-                iframe.style.height = viewport_height + 'px';
-                iframe.src = 'http://localhost/screen_emulator/render/index.html';
-                emulator_container.style.left = navigation_bar_left + 'px';
-                emulator_container.style.top = navigation_bar_top + 'px';
+                emulator_container.style.width = viewport_width + "px";
+                emulator_container.style.height = viewport_height + "px";
+                iframe.style.width = viewport_width + "px";
+                iframe.style.height = viewport_height + "px";
+                emulator_container.style.left = navigation_bar_left + "px";
+                emulator_container.style.top = navigation_bar_top + "px";
             }
         </script>
     </body>

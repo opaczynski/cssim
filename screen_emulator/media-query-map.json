@@ -1,6 +1,30 @@
 {
   "index.html": {
-    "emulator-orientation-landscape": "main, main div.section:first-child, main div.section:nth-child(2), main div.section:nth-child(3), main div.section:nth-child(4), main div.section:nth-child(5)",
-    "emulator-orientation-portrait": "main, .section, main div.section:first-child, main div.section:nth-child(2), main div.section:nth-child(3), main div.section:nth-child(4), main div.section:nth-child(5)"
-  }
+    "emulator-min-resolution-2dppx": "#dpi",
+    "emulator-color-1": "#color",
+    "emulator-color-gamut-rec2020": "#color-gamut",
+    "emulator-color-index-1500": "#color-index",
+    "emulator-forced-colors-active": "#forced-colors",
+    "emulator-inverted-colors-inverted": "#inverted-colors",
+    "emulator-monochrome-1": "#monochrome",
+    "emulator-dynamic-range-high": "#dynamic-range",
+    "emulator-prefers-color-scheme-dark": "#color-scheme",
+    "emulator-prefers-contrast-more": "#contrast",
+    "emulator-prefers-reduced-motion-reduce": "#reduced-motion",
+    "emulator-prefers-reduced-transparency-reduce": "#reduced-transparency",
+    "emulator-update-slow": "#update",
+    "emulator-scan-interlace": "#scan",
+    "emulator-grid-1": "#grid",
+    "emulator-display-mode-standalone": "#display-mode",
+    "emulator-overflow-block-scroll": "#overflow-block",
+    "emulator-overflow-inline-none": "#overflow-inline",
+    "emulator--webkit-transform-3d": "#transform-3d",
+    "emulator-scripting-initial-only": "#scripting",
+    "emulator-pointer-coarse": "#pointer",
+    "emulator-hover-hover": "#hover",
+    "emulator-device-posture-continuous": "#device-posture",
+    "emulator-min-screen-fold-angle-120deg": "#screen-fold-angle",
+    "emulator-screen-fold-posture-book": "#screen-fold-posture"
+  },
+  "subpage.htm": {}
 }

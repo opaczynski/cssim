@@ -5,90 +5,152 @@
     <body>
         <svg id="svg-container">
             <filter id="color-filter"></filter>
+            <filter id="blind-color-filter"></filter>
         </svg>
         <div style="width: 270px; height: 660px; overflow: hidden" id="emulator_container">
             <iframe src="screen_viewport.html" style="transform-origin: 0 0"></iframe>
         </div>
+        <img id="skin" />
         <script>
             const mod = window.appAPI.getMod();
             const scale = 100 / mod;
             const window_width = window.appAPI.getWidth();
             const window_height = window.appAPI.getHeight();
-            const iframe = document.querySelector('#emulator_container iframe');
-            const emulator_container = document.getElementById('emulator_container');
+            const iframe = document.querySelector("#emulator_container iframe");
+            const emulator_container = document.getElementById("emulator_container");
+            const skin = document.getElementById("skin");
             let payload = {};
+            let resize = false;
             iframe.style.transform = `scale(${1 / mod})`;
-            fetch('panel.json')
-                .then(res => res.json())
-                .then(data => {
+            fetch("panel.json")
+                .then((res) => res.json())
+                .then((data) => {
+                    payload.resize = false;
+                    pos = 0;
                     payload.mod = mod;
                     payload.navigation_bar_left = data.navigation_bar_left;
                     payload.navigation_bar_right = data.navigation_bar_right;
                     payload.navigation_bar_top = data.navigation_bar_top;
                     payload.navigation_bar_bottom = data.navigation_bar_bottom;
-                    payload.inverted_colors = data.inverted_colors;
                     payload.window_width = window_width;
                     payload.window_height = window_height;
                     payload.orientation = data.orientation;
-                    iframe.addEventListener('load', () => {
-                        iframe.contentWindow.postMessage(payload, '*');
+                    payload.scripting = data.scripting;
+                    payload.url = data.url;
+                    iframe.addEventListener("load", () => {
+                        iframe.contentWindow.postMessage(payload, "*");
                     });
+                    iframe.style.filter = "";
+                    if (data.inverted_colors == "inverted") {
+                        iframe.style.filter += " invert(100%)";
+                    }
+                    if (data.skin != "none") {
+                        skin.src = "../skins/" + data.skin;
+                    }
+                    if (data.color_blindness != "none") {
+                        svg_content = "";
+                        if (iframe.style.filter != "") {
+                            iframe.style.filter += " ";
+                        }
+                        if (data.color_blindness == "protanopia") {
+                            svg_content = '<feColorMatrix type="matrix" values="0.567 0.433 0 0 0 0.558 0.442 0 0 0 0 0.242 0.758 0 0 0 0 0 1 0"/>';
+                        } else if (data.color_blindness == "deuteranopia") {
+                            svg_content = '<feColorMatrix type="matrix" values="0.625 0.375 0 0 0 0.7 0.3 0 0 0 0 0.3 0.7 0 0 0 0 0 1 0"/>';
+                        } else if (data.color_blindness == "tritanopia") {
+                            svg_content = '<feColorMatrix type="matrix" values="0.95 0.05 0 0 0 0 0.433 0.567 0 0 0 0.475 0.525 0 0 0 0 0 1 0"/>';
+                        } else if (data.color_blindness == "achromatopsia") {
+                            svg_content = '<feColorMatrix type="matrix" values="0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0 0 0 1 0"/><feGaussianBlur stdDeviation="0.4" />';
+                        }
+                        document.getElementById("blind-color-filter").innerHTML = svg_content;
+                        iframe.style.filter += "url(#blind-color-filter)";
+                    }
                     if (data.monochrome !== 0) {
-                        svg_content = '';
-                        if (data.monochrome == 1) {
-                            if (data.monochrome_color == 'white') {
+                        svg_content = "";
+                        if (data.monochrome == 1 || data.checkbox_monochrome) {
+                            if (data.monochrome_color == "white") {
                                 svg_content = '<feColorMatrix type="matrix" values="0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0 0 0 0 1"/><feComponentTransfer><feFuncR type="discrete" tableValues="0 1"/><feFuncG type="discrete" tableValues="0 1"/><feFuncB type="discrete" tableValues="0 1"/></feComponentTransfer>';
                             }
-                            if (data.monochrome_color == 'blue') {
+                            if (data.monochrome_color == "blue") {
                                 svg_content = '<feColorMatrix type="matrix" values="0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0 0 0 0 1"/><feComponentTransfer><feFuncR type="discrete" tableValues="0 0"/><feFuncG type="discrete" tableValues="0 0"/><feFuncB type="discrete" tableValues="0 1"/></feComponentTransfer>';
                             }
-                            if (data.monochrome_color == 'amber') {
+                            if (data.monochrome_color == "amber") {
                                 svg_content = '<feColorMatrix type="matrix" values="0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0 0 0 0 1"/><feComponentTransfer><feFuncR type="discrete" tableValues="0 1"/><feFuncG type="discrete" tableValues="0 0.75"/><feFuncB type="discrete" tableValues="0 0"/></feComponentTransfer>';
                             }
-                            if (data.monochrome_color == 'green') {
+                            if (data.monochrome_color == "green") {
                                 svg_content = '<feColorMatrix type="matrix" values="0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0 0 0 0 1"/><feComponentTransfer><feFuncR type="discrete" tableValues="0 0"/><feFuncG type="discrete" tableValues="0 1"/><feFuncB type="discrete" tableValues="0 0"/></feComponentTransfer>';
                             }
                         } else if (data.monochrome == 2) {
-                            if (data.monochrome_color == 'white') {
+                            if (data.monochrome_color == "white") {
                                 svg_content = '<feColorMatrix type="matrix" values="0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0 0 0 1 0"/><feComponentTransfer><feFuncR type="discrete" tableValues="0 0.33 0.66 1"/><feFuncG type="discrete" tableValues="0 0.33 0.66 1"/><feFuncB type="discrete" tableValues="0 0.33 0.66 1"/></feComponentTransfer>';
                             }
-                            if (data.monochrome_color == 'blue') {
+                            if (data.monochrome_color == "blue") {
                                 svg_content = '<feColorMatrix type="matrix" values="0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0 0 0 1 0"/><feComponentTransfer><feFuncR type="discrete" tableValues="0 0 0 0"/><feFuncG type="discrete" tableValues="0 0 0 0"/><feFuncB type="discrete" tableValues="0 0.33 0.66 1"/></feComponentTransfer>';
                             }
-                            if (data.monochrome_color == 'amber') {
+                            if (data.monochrome_color == "amber") {
                                 svg_content = '<feColorMatrix type="matrix" values="0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0 0 0 1 0"/><feComponentTransfer><feFuncR type="table" tableValues="0 0.33 0.66 1"/><feFuncG type="table" tableValues="0 0.25 0.5 0.75"/><feFuncB type="table" tableValues="0 0 0 0"/></feComponentTransfer>';
                             }
-                            if (data.monochrome_color == 'green') {
+                            if (data.monochrome_color == "green") {
                                 svg_content = '<feColorMatrix type="matrix" values="0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0 0 0 1 0"/><feComponentTransfer><feFuncR type="discrete" tableValues="0 0 0 0"/><feFuncG type="discrete" tableValues="0 0.33 0.66 1"/><feFuncB type="discrete" tableValues="0 0 0 0"/></feComponentTransfer>';
                             }
                         } else if (data.monochrome == 4) {
-                            if (data.monochrome_color == 'white') {
+                            if (data.monochrome_color == "white") {
                                 svg_content = '<feColorMatrix type="matrix" values="0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0 0 0 1 0"/><feComponentTransfer><feFuncR type="table" tableValues="0 0.066 0.133 0.2 0.266 0.333 0.4 0.466 0.533 0.6 0.666 0.733 0.8 0.866 0.933 1"/><feFuncG type="table" tableValues="0 0.066 0.133 0.2 0.266 0.333 0.4 0.466 0.533 0.6 0.666 0.733 0.8 0.866 0.933 1"/><feFuncB type="table" tableValues="0 0.066 0.133 0.2 0.266 0.333 0.4 0.466 0.533 0.6 0.666 0.733 0.8 0.866 0.933 1"/></feComponentTransfer>';
                             }
-                            if (data.monochrome_color == 'blue') {
+                            if (data.monochrome_color == "blue") {
                                 svg_content = '<feColorMatrix type="matrix" values="0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0 0 0 1 0"/><feComponentTransfer><feFuncR type="table" tableValues="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/><feFuncG type="table" tableValues="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/><feFuncB type="table" tableValues="0 0.066 0.133 0.2 0.266 0.333 0.4 0.466 0.533 0.6 0.666 0.733 0.8 0.866 0.933 1"/></feComponentTransfer>';
                             }
-                            if (data.monochrome_color == 'amber') {
+                            if (data.monochrome_color == "amber") {
                                 svg_content = '<feColorMatrix type="matrix" values="0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0 0 0 1 0"/><feComponentTransfer><feFuncR type="table" tableValues="0 0.33 0.33 0.33 0.33 0.33 0.33 0.33 0.66 0.66 0.66 0.66 0.66 0.66 0.66 1"/><feFuncG type="table" tableValues="0 0.25 0.25 0.25 0.25 0.25 0.25 0.25 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.75"/><feFuncB type="table" tableValues="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/></feComponentTransfer>';
                             }
-                            if (data.monochrome_color == 'green') {
+                            if (data.monochrome_color == "green") {
                                 svg_content = '<feColorMatrix type="matrix" values="0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0 0 0 1 0"/><feComponentTransfer><feFuncR type="table" tableValues="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/><feFuncG type="table" tableValues="0 0.066 0.133 0.2 0.266 0.333 0.4 0.466 0.533 0.6 0.666 0.733 0.8 0.866 0.933 1"/><feFuncB type="table" tableValues="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/></feComponentTransfer>';
                             }
                         }
-                        document.getElementById('color-filter').innerHTML = svg_content;
-                        iframe.style.filter = 'url(#color-filter)';
+                        document.getElementById("color-filter").innerHTML = svg_content;
+                        if (iframe.style.filter == "") {
+                            iframe.style.filter = "url(#color-filter)";
+                        } else iframe.style.filter += " url(#color-filter)";
                     }
                 });
             setTimeout(() => {
-                fetch('panel.json')
-                    .then(res => res.json())
-                    .then(data => {
-                        emulator_container.style.width = window_width + 'px';
-                        emulator_container.style.height = window_height + 'px';
-                        iframe.style.width = window_width * mod + 'px';
-                        iframe.style.height = window_height * mod + 'px';
+                fetch("panel.json")
+                    .then((res) => res.json())
+                    .then((data) => {
+                        emulator_container.style.width = window_width + "px";
+                        emulator_container.style.height = window_height + "px";
+                        iframe.style.width = window_width * mod + "px";
+                        iframe.style.height = window_height * mod + "px";
 
-                        iframe.contentWindow.postMessage(payload, '*');
+                        iframe.contentWindow.postMessage(payload, "*");
+                        window.addEventListener("resize", () => {
+                            if (resize) return;
+                            resize = true;
+                            if (pos == 0) {
+                                skin.style.transform = "rotate(-90deg) translate(-100%, 0)";
+                                skin.style.width = "100vh";
+                                skin.style.height = "100vw";
+                                pos = 1;
+                            } else {
+                                skin.style.transform = "none";
+                                skin.style.width = "100vw";
+                                skin.style.height = "100vh";
+                                pos = 0;
+                            }
+                            w = emulator_container.style.height;
+                            h = emulator_container.style.width;
+                            emulator_container.style.width = w;
+                            emulator_container.style.height = h;
+                            w = iframe.style.height;
+                            h = iframe.style.width;
+                            iframe.style.width = w;
+                            iframe.style.height = h;
+                            payload.resize = true;
+                            iframe.contentWindow.postMessage(payload, "*");
+                            payload.resize = false;
+                            setTimeout(() => {
+                                resize = false;
+                            }, 50);
+                        });
                     });
             }, 200);
         </script>

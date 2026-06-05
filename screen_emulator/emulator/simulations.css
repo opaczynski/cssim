@@ -1,0 +1,22 @@
+div#emulator_finger_simulation {
+    aspect-ratio: 1 / 1 !important;
+    position: absolute !important;
+    z-index: 999 !important;
+    transform: translate(-50%, -50%);
+
+    background: radial-gradient(
+        circle at 30% 30%,
+        rgba(255, 255, 255, 0.35),
+        rgba(24, 138, 204, 0.12) 40%,
+        rgba(10, 60, 90, 0.08) 100%
+    ) !important;
+
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    border-radius: 50% !important;
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25),
+        inset 0 -2px 8px rgba(0, 0, 0, 0.08) !important;
+
+    filter: drop-shadow(0 0 12px rgba(24, 138, 204, 0.35)) !important;
+}

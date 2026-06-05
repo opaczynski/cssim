@@ -1,0 +1,229 @@
+body {
+  padding-top: env(titlebar-area-height);
+}
+table {
+  width: 30vw;
+  table-layout: fixed;
+  border-collapse: collapse;
+  margin: auto;
+}
+table tr td:nth-child(1) {
+  width: 50%;
+  text-align: right;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+table tr td:nth-child(2) {
+  width: 50%;
+  text-align: left;
+  word-wrap: break-word;
+  white-space: normal;
+}
+table tr td:only-child {
+  width: 100%;
+  text-align: center;
+}
+#dpi,
+#color,
+#color-gamut,
+#color-index,
+#forced-colors,
+#inverted-colors,
+#monochrome,
+#dynamic-range,
+#color-scheme,
+#contrast,
+#reduced-motion,
+#reduced-transparency,
+#update,
+#scan,
+#grid,
+#display-mode,
+#overflow-block,
+#overflow-inline,
+#transform-3d,
+#scripting,
+#pointer,
+#hover,
+#device-posture,
+#screen-fold-angle,
+#screen-fold-posture {
+  background-color: red !important;
+}
+@media (min-resolution: 2dppx) {
+  #dpi {
+    background-color: green;
+  }
+}
+@media (color: 1) {
+  #color {
+    background-color: green;
+  }
+}
+@media (color-gamut: rec2020) {
+  #color-gamut {
+    background-color: green;
+  }
+}
+@media (color-index: 1500) {
+  #color-index {
+    background-color: green;
+  }
+}
+@media (forced-colors: active) {
+  #forced-colors {
+    background-color: green !important;
+    color: red;
+  }
+}
+@media (inverted-colors: inverted) {
+  #inverted-colors {
+    background-color: green;
+  }
+}
+@media (monochrome: 1) {
+  #monochrome {
+    background-color: green;
+  }
+}
+@media (dynamic-range: high) {
+  #dynamic-range {
+    background-color: green;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  #color-scheme {
+    background-color: green;
+  }
+}
+@media (prefers-contrast: more) {
+  #contrast {
+    background-color: green;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #reduced-motion {
+    background-color: green;
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  #reduced-transparency {
+    background-color: green;
+  }
+}
+@media (update: slow) {
+  #update {
+    background-color: green;
+  }
+}
+@media (scan: interlace) {
+  #scan {
+    background-color: green;
+  }
+}
+@media (grid: 1) {
+  #grid {
+    background-color: green;
+  }
+}
+@media (display-mode: standalone) {
+  #display-mode {
+    background-color: green;
+  }
+}
+@media (overflow-block: scroll) {
+  #overflow-block {
+    background-color: green;
+  }
+}
+@media (overflow-inline: none) {
+  #overflow-inline {
+    background-color: green;
+  }
+}
+@media (-webkit-transform-3d) {
+  #transform-3d {
+    background-color: green;
+  }
+}
+@media (scripting: initial-only) {
+  #scripting {
+    background-color: green;
+  }
+}
+@media (pointer: coarse) {
+  #pointer {
+    background-color: green;
+  }
+}
+@media (hover: hover) {
+  #hover {
+    background-color: green;
+  }
+}
+@media (hover: hover) {
+  #hover {
+    background-color: green;
+  }
+}
+@media (device-posture: continuous) {
+  #device-posture {
+    background-color: green;
+  }
+}
+@media (min-screen-fold-angle: 120deg) {
+  #screen-fold-angle {
+    background-color: green;
+  }
+}
+@media (screen-fold-posture: book) {
+  #screen-fold-posture {
+    background-color: green;
+  }
+}
+
+.env-area {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  box-sizing: border-box;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+}
+#safe-area-visual {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-top: env(safe-area-inset-top, 0) solid rgba(255, 0, 0, 0.4);
+  border-right: env(safe-area-inset-right, 0) solid rgba(255, 0, 0, 0.4);
+  border-bottom: env(safe-area-inset-bottom, 0) solid rgba(255, 0, 0, 0.4);
+  border-left: env(safe-area-inset-left, 0) solid rgba(255, 0, 0, 0.4);
+  background-color: transparent;
+  color: red;
+}
+#titlebar-visual {
+  left: env(titlebar-area-x, 0);
+  top: env(titlebar-area-y, 0);
+  width: env(titlebar-area-width, 0);
+  height: env(titlebar-area-height, 0);
+  background-color: rgba(0, 0, 255, 0.3);
+  border: 2px dashed blue;
+  color: blue;
+  overflow: hidden;
+}
+#keyboard-visual {
+  top: env(keyboard-inset-top, 0);
+  right: env(keyboard-inset-right, 0);
+  bottom: env(keyboard-inset-bottom, 0);
+  left: env(keyboard-inset-left, 0);
+  background-color: rgba(0, 255, 0, 0.2);
+  border: 2px dotted green;
+  color: green;
+  overflow: hidden;
+}

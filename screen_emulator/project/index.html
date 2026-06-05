@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Test</title>
+        <link rel="stylesheet" href="style.css" />
+        <style>
+            .title {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <p class="title">Red backgrounds indicate “CSS did not detect this media query,” and green backgrounds indicate “CSS detected this media query.” Bold text indicates that it was detected by JavaScript.</p>
+        <table>
+            <tr>
+                <td colspan="2"><button onclick="showEnvSims()">Show/Hide env simulations</button></td>
+            </tr>
+            <tr>
+                <td colspan="2" id="scripts">Scripts are disabled</td>
+            </tr>
+            <tr>
+                <td>width:</td>
+                <td id="width"></td>
+            </tr>
+            <tr>
+                <td>height:</td>
+                <td id="height"></td>
+            </tr>
+            <tr id="dpi">
+                <td colspan="2">DPI≥2dppx</td>
+            </tr>
+            <tr id="color">
+                <td colspan="2">color: 1</td>
+            </tr>
+            <tr id="color-gamut">
+                <td colspan="2">color gamut: rec2020</td>
+            </tr>
+            <tr id="color-index">
+                <td colspan="2">color index: 1500</td>
+            </tr>
+            <tr id="forced-colors">
+                <td colspan="2">forced colors: active</td>
+            </tr>
+            <tr id="inverted-colors">
+                <td colspan="2">inverted colors: inverted</td>
+            </tr>
+            <tr id="monochrome">
+                <td colspan="2">monochrome: 1</td>
+            </tr>
+            <tr id="dynamic-range">
+                <td colspan="2">dynamic range: high</td>
+            </tr>
+            <tr id="color-scheme">
+                <td colspan="2">Color theme: dark</td>
+            </tr>
+            <tr id="contrast">
+                <td colspan="2">Contrast: more</td>
+            </tr>
+            <tr id="reduced-motion">
+                <td colspan="2">Reduced motion: reduce</td>
+            </tr>
+            <tr id="reduced-transparency">
+                <td colspan="2">Reduced transparency: reduce</td>
+            </tr>
+            <tr id="update">
+                <td colspan="2">Update: slow</td>
+            </tr>
+            <tr id="scan">
+                <td colspan="2">Scan: interlace</td>
+            </tr>
+            <tr id="grid">
+                <td colspan="2">Grid: 1</td>
+            </tr>
+            <tr id="display-mode">
+                <td colspan="2">Display mode: standalone</td>
+            </tr>
+            <tr id="overflow-block">
+                <td colspan="2">Overflow block: scroll</td>
+            </tr>
+            <tr id="overflow-inline">
+                <td colspan="2">Overflow inline: none</td>
+            </tr>
+            <tr id="transform-3d">
+                <td colspan="2">Transform 3d: active</td>
+            </tr>
+            <tr id="scripting">
+                <td colspan="2">Scripting: initial-only</td>
+            </tr>
+            <tr id="pointer">
+                <td colspan="2">Pointer: coarse</td>
+            </tr>
+            <tr id="hover">
+                <td colspan="2">Hover: hover</td>
+            </tr>
+            <tr>
+                <td>navigator.userAgent:</td>
+                <td id="ua"></td>
+            </tr>
+            <tr>
+                <td>navigator.userAgentData.mobile:</td>
+                <td id="ua_mobile">false</td>
+            </tr>
+            <tr>
+                <td>navigator.userAgentData.platform:</td>
+                <td id="ua_platform">Windows</td>
+            </tr>
+            <tr>
+                <td colspan="2">navigator.userAgentData.brands:</td>
+            </tr>
+            <tr>
+                <td id="ua_brands" colspan="2"></td>
+            </tr>
+            <tr id="device-posture">
+                <td>device posture:</td>
+                <td>continuous</td>
+            </tr>
+            <tr id="screen-fold-angle">
+                <td colspan="2">screen fold angle≥120°</td>
+            </tr>
+            <tr id="screen-fold-posture">
+                <td colspan="2">screen fold posture: book</td>
+            </tr>
+        </table>
+        <div class="env-area" id="safe-area-visual">Safe Area Insets</div>
+        <div class="env-area" id="titlebar-visual">Titlebar Area</div>
+        <div class="env-area" id="keyboard-visual">Keyboard Insets</div>
+        <script src="script.js"></script>
+    </body>
+</html>
