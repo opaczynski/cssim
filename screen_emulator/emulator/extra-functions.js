@@ -401,16 +401,14 @@ function emulator_intersects_circle(rect, cx, cy, radius) {
 function emulator_create_finger_area(size) {
     document.querySelector("body").innerHTML += '<div id="emulator_finger_simulation"></div>';
     const emulator_finger_position = document.getElementById("emulator_finger_simulation");
-    emulator_finger_position.style.width = size + "px";
+    emulator_finger_position.style.setProperty("width", size + "px", "important");
     let blur = Math.round(0.02 * size);
-    emulator_finger_position.style.backdropFilter = "blur(" + blur + "px)";
-    emulator_finger_position.style.webkitBackdropFilter = "blur(" + blur + "px)";
+    emulator_finger_position.style.setProperty("backdrop-filter", "blur(" + blur + "px)", "important");
+    emulator_finger_position.style.setProperty("webkit-backdrop-filter", "blur(" + blur + "px)", "important");
     document.addEventListener("mousedown", (e) => {
         const el = emulator_finger_position;
-
-        el.style.left = e.clientX + "px";
-        el.style.top = e.clientY + "px";
-
+        el.style.setProperty("left", e.clientX + "px", "important");
+        el.style.setProperty("top", e.clientY + "px", "important");
         const size = el.offsetWidth;
         emulator_get_elements_in_radius(e.clientX, e.clientY, Math.round(size / 2)).forEach((el) => el.click());
         el.animate(
