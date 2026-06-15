@@ -28,7 +28,6 @@ CSSim goes far beyond simple window resizing. Through its control panel, you can
 
 ## ⚙️ Requirements
 
-- [XAMPP](https://www.apachefriends.org/) or a compatible substitute (Apache + PHP)  
 - [Node.js & npm](https://nodejs.org/)  
 
 ---
