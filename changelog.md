@@ -21,13 +21,14 @@ Information about updates will appear here.
 
 ## ⚠️ Potential Limitations
 
--   The application is designed for **plain CSS** only.  
+-   The application is designed for **plain CSS** only.
     Framework-based projects (React, Angular, Vue, etc.) or more advanced HTML structures may cause unexpected behavior.
+-   Color-blindness filters are for illustrative purposes only.
 -   Currently, there is no support for **Safari- or Firefox-exclusive media queries**.  
     (Planned in future releases.)
 - Grid mode does not simulate terminals correctly. However, the media query itself will be activated.
-- This emulator only modifies CSS—there is currently no JS hooks.
 - **Potential** differences between simulated high-contrast and real behavior.
+- User scripts may conflict with my hooks. I would advise against testing scripts that dynamically modify styles.
 
 ---
 
