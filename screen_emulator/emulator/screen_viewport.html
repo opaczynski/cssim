@@ -37,7 +37,7 @@
                     setViewport();
                     return;
                 }
-                if (data.scripting == "none" && !data.url.startsWith("http://localhost/screen_emulator/render/")) {
+                if (data.scripting == "none" && !data.url.startsWith("http://localhost:3000/render/")) {
                     iframe.sandbox = "";
                 }
                 mod = parseFloat(data["mod"]);

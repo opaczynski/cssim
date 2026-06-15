@@ -87,7 +87,7 @@
                 sendData();
             }
             function sendData() {
-                fetch("http://localhost/screen_emulator/emulator/panel.php", {
+                fetch("http://localhost:3000/emulator/panel.php", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -98,7 +98,7 @@
             sendData();
 
             function fetchJsonData() {
-                fetch("http://localhost/screen_emulator/emulator/panel_get_data.php")
+                fetch("http://localhost:3000/emulator/panel_get_data.php")
                     .then((response) => response.json())
                     .then((data) => {
                         fold_degree_slider.max = data.screen_fold_api_max;

@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain, screen, session } = require("electron");
 const path = require("path");
 const fs = require("fs");
+const express = require("express");
 
 const { copyProjectToRender, analyzeMediaQueries, transformAllCSS, appendScriptToAllHTMLFilesInRender } = require("./render");
 
@@ -8,6 +9,13 @@ let newWin1 = null;
 let originalWidth = null;
 let originalHeight = null;
 let watchInterval = null;
+
+const server = express();
+const PORT = 3000;
+server.use(express.static(app.getAppPath()));
+server.listen(PORT, "127.0.0.1", () => {
+    console.log(`Localhost running on http://127.0.0.1:${PORT}`);
+});
 
 function centerWindow(width, height) {
     if (!newWin1) return;
@@ -145,7 +153,7 @@ app.whenReady().then(() => {
             devTools: true,
         },
     });
-    mainWindow.loadFile("emulator/index.html");
+    mainWindow.loadURL(`http://127.0.0.1:${PORT}/emulator/index.html`);
     ipcMain.handle("open-bend-window", async (event, options) => {
         session.defaultSession.clearCache();
         const { width, height, bend, mod } = options;
@@ -161,7 +169,7 @@ app.whenReady().then(() => {
                 additionalArguments: [`--bend=${bend}`, `--width=${width}`, `--height=${height}`, `--mod=${mod}`],
             },
         });
-        newWin1.loadFile("emulator/screen.html");
+        newWin1.loadURL(`http://127.0.0.1:${PORT}/emulator/screen.html`);
         originalWidth = newWin1.getBounds().width;
         originalHeight = newWin1.getBounds().height;
     });

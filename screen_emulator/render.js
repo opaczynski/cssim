@@ -372,7 +372,7 @@ async function transformAllCSS() {
 
 async function appendScriptToAllHTMLFilesInRender() {
     const baseDir = path.resolve("./render");
-    const scriptTag = `<script src="http://localhost/screen_emulator/emulator/media-query.js"></script>`;
+    const scriptTag = `<script src="http://localhost:3000/emulator/media-query.js"></script>`;
 
     function processFile(filePath) {
         const ext = path.extname(filePath).toLowerCase();
@@ -383,7 +383,7 @@ async function appendScriptToAllHTMLFilesInRender() {
         const hasHead = $("head").length > 0;
         if (!hasBody) return;
         if (hasHead) {
-            const stylesheetLink = `<link rel="stylesheet" href="http://localhost/screen_emulator/emulator/environment-variables.css"><link rel="stylesheet" href="http://localhost/screen_emulator/emulator/simulations.css"><script src="http://localhost/screen_emulator/emulator/extra-functions.js"></script>`;
+            const stylesheetLink = `<link rel="stylesheet" href="http://localhost:3000/emulator/environment-variables.css"><link rel="stylesheet" href="http://localhost:3000/emulator/simulations.css"><script src="http://localhost:3000/emulator/extra-functions.js"></script>`;
             $("head").prepend(stylesheetLink);
         }
         $("body").append(scriptTag);

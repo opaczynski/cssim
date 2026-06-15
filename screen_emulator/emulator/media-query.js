@@ -1,9 +1,9 @@
 forceClasses();
-const emulator_currentFile = location.pathname.split("screen_emulator/render/").pop();
+const emulator_currentFile = location.pathname.split("render/").pop();
 let emulator_media_query = {};
 let emulator_panel = {};
 let emulator_dual_screen = "";
-Promise.all([fetch("http://localhost/screen_emulator/media-query-map.json").then((r) => r.json()), fetch("http://localhost/screen_emulator/emulator/panel.json").then((r) => r.json())])
+Promise.all([fetch("http://localhost:3000/media-query-map.json").then((r) => r.json()), fetch("http://localhost:3000/emulator/panel.json").then((r) => r.json())])
     .then(([mediaData, panelData]) => {
         // media-query-map.json
         const emulator_classesMap = mediaData[emulator_currentFile] || {};
@@ -352,7 +352,7 @@ Promise.all([fetch("http://localhost/screen_emulator/media-query-map.json").then
         console.error("JSON loading error:", err);
     });
 setInterval(() => {
-    fetch("http://localhost/screen_emulator/emulator/panel.json")
+    fetch("http://localhost:3000/emulator/panel.json")
         .then((res) => res.json())
         .then((data) => {
             for (const emulator_key in data) {

@@ -161,7 +161,7 @@ preset.addEventListener("change", () => {
         if (el) manageObj(el, 3);
     });
     if (preset.value != "none") {
-        fetch("http://localhost/screen_emulator/presets/" + preset.value)
+        fetch("http://localhost:3000/presets/" + preset.value)
             .then((res) => res.json())
             .then((data) => {
                 const keyToElementMap = {
@@ -466,7 +466,7 @@ function formCheck() {
         newData.url = textbox_url.value;
     } else {
         manageObj(row_url, 0);
-        newData.url = "http://localhost/screen_emulator/render/index.html";
+        newData.url = "http://localhost:3000/render/index.html";
     }
     window.appAPI.saveJson(newData);
 

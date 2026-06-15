@@ -379,7 +379,7 @@ function createMQL(query, matches) {
 if (getParameter("scripting") == "none") {
     const meta = document.createElement("meta");
     meta.httpEquiv = "Content-Security-Policy";
-    meta.content = `script-src http://localhost/screen_emulator/emulator/media-query.js http://localhost/screen_emulator/emulator/extra-functions.js`;
+    meta.content = `script-src http://localhost:3000/emulator/media-query.js http://localhost:3000/emulator/extra-functions.js`;
     document.head.prepend(meta);
 }
 
