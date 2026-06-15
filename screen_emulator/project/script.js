@@ -14,7 +14,7 @@ bold("color-index", "color-index: 1500");
 bold("forced-colors", "forced-colors: active");
 bold("inverted-colors", "inverted-colors: inverted");
 bold("dynamic-range", "dynamic-range: high");
-bold("color-scheme", "prefers-color-scheme: more");
+bold("color-scheme", "prefers-color-scheme: dark");
 bold("contrast", "prefers-contrast: more");
 bold("reduced-motion", "prefers-reduced-motion: reduce");
 bold("reduced-transparency", "prefers-reduced-transparency: reduce");
