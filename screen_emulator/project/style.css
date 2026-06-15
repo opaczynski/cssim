@@ -24,6 +24,7 @@ table tr td:only-child {
   width: 100%;
   text-align: center;
 }
+
 #dpi,
 #color,
 #color-gamut,
@@ -49,139 +50,133 @@ table tr td:only-child {
 #device-posture,
 #screen-fold-angle,
 #screen-fold-posture {
-  background-color: red !important;
+  background-color: red;
 }
+
 @media (min-resolution: 2dppx) {
-  #dpi {
-    background-color: green;
-  }
+  #dpi { background-color: green; }
 }
+.emulator-min-resolution-2dppx { background-color: green !important; font-weight: bold; }
+
 @media (color: 1) {
-  #color {
-    background-color: green;
-  }
+  #color { background-color: green; }
 }
+.emulator-color-1 { background-color: green !important; font-weight: bold; }
+
 @media (color-gamut: rec2020) {
-  #color-gamut {
-    background-color: green;
-  }
+  #color-gamut { background-color: green; }
 }
+.emulator-color-gamut-rec2020 { background-color: green !important; font-weight: bold; }
+
 @media (color-index: 1500) {
-  #color-index {
-    background-color: green;
-  }
+  #color-index { background-color: green; }
 }
+.emulator-color-index-1500 { background-color: green !important; font-weight: bold; }
+
 @media (forced-colors: active) {
-  #forced-colors {
-    background-color: green !important;
-    color: red;
-  }
+  #forced-colors { background-color: green !important; color: red; }
 }
+.emulator-forced-colors-active { background-color: green !important; color: red !important; font-weight: bold; }
+
 @media (inverted-colors: inverted) {
-  #inverted-colors {
-    background-color: green;
-  }
+  #inverted-colors { background-color: green; }
 }
+.emulator-inverted-colors-inverted { background-color: green !important; font-weight: bold; }
+
 @media (monochrome: 1) {
-  #monochrome {
-    background-color: green;
-  }
+  #monochrome { background-color: green; }
 }
+.emulator-monochrome-1 { background-color: green !important; font-weight: bold; }
+
 @media (dynamic-range: high) {
-  #dynamic-range {
-    background-color: green;
-  }
+  #dynamic-range { background-color: green; }
 }
+.emulator-dynamic-range-high { background-color: green !important; font-weight: bold; }
+
 @media (prefers-color-scheme: dark) {
-  #color-scheme {
-    background-color: green;
-  }
+  #color-scheme { background-color: green; }
 }
+.emulator-prefers-color-scheme-dark { background-color: green !important; font-weight: bold; }
+
 @media (prefers-contrast: more) {
-  #contrast {
-    background-color: green;
-  }
+  #contrast { background-color: green; }
 }
+.emulator-prefers-contrast-more { background-color: green !important; font-weight: bold; }
+
 @media (prefers-reduced-motion: reduce) {
-  #reduced-motion {
-    background-color: green;
-  }
+  #reduced-motion { background-color: green; }
 }
+.emulator-prefers-reduced-motion-reduce { background-color: green !important; font-weight: bold; }
+
 @media (prefers-reduced-transparency: reduce) {
-  #reduced-transparency {
-    background-color: green;
-  }
+  #reduced-transparency { background-color: green; }
 }
+.emulator-prefers-reduced-transparency-reduce { background-color: green !important; font-weight: bold; }
+
 @media (update: slow) {
-  #update {
-    background-color: green;
-  }
+  #update { background-color: green; }
 }
+.emulator-update-slow { background-color: green !important; font-weight: bold; }
+
 @media (scan: interlace) {
-  #scan {
-    background-color: green;
-  }
+  #scan { background-color: green; }
 }
+.emulator-scan-interlace { background-color: green !important; font-weight: bold; }
+
 @media (grid: 1) {
-  #grid {
-    background-color: green;
-  }
+  #grid { background-color: green; }
 }
+.emulator-grid-1 { background-color: green !important; font-weight: bold; }
+
 @media (display-mode: standalone) {
-  #display-mode {
-    background-color: green;
-  }
+  #display-mode { background-color: green; }
 }
+.emulator-display-mode-standalone { background-color: green !important; font-weight: bold; }
+
 @media (overflow-block: scroll) {
-  #overflow-block {
-    background-color: green;
-  }
+  #overflow-block { background-color: green; }
 }
+.emulator-overflow-block-scroll { background-color: green !important; font-weight: bold; }
+
 @media (overflow-inline: none) {
-  #overflow-inline {
-    background-color: green;
-  }
+  #overflow-inline { background-color: green; }
 }
+.emulator-overflow-inline-none { background-color: green !important; font-weight: bold; }
+
 @media (-webkit-transform-3d) {
-  #transform-3d {
-    background-color: green;
-  }
+  #transform-3d { background-color: green; }
 }
+.emulator--webkit-transform-3d { background-color: green !important; font-weight: bold; }
+
 @media (scripting: initial-only) {
-  #scripting {
-    background-color: green;
-  }
+  #scripting { background-color: green; }
 }
+.emulator-scripting-initial-only { background-color: green !important; font-weight: bold; }
+
 @media (pointer: coarse) {
-  #pointer {
-    background-color: green;
-  }
+  #pointer { background-color: green; }
 }
+.emulator-pointer-coarse { background-color: green !important; font-weight: bold; }
+
 @media (hover: hover) {
-  #hover {
-    background-color: green;
-  }
+  #hover { background-color: green; }
 }
-@media (hover: hover) {
-  #hover {
-    background-color: green;
-  }
-}
+.emulator-hover-hover { background-color: green !important; font-weight: bold; }
+
 @media (device-posture: continuous) {
-  #device-posture {
-    background-color: green;
-  }
+  #device-posture { background-color: green; }
 }
+.emulator-device-posture-continuous { background-color: green !important; font-weight: bold; }
+
 @media (min-screen-fold-angle: 120deg) {
-  #screen-fold-angle {
-    background-color: green;
-  }
+  #screen-fold-angle { background-color: green; }
 }
+.emulator-min-screen-fold-angle-120deg { background-color: green !important; font-weight: bold; }
+
 @media (screen-fold-posture: book) {
-  #screen-fold-posture {
-    background-color: green;
-  }
+  #screen-fold-posture { background-color: green; }
 }
+.emulator-screen-fold-posture-book { background-color: green !important; font-weight: bold; }
 
 .env-area {
   position: fixed;
