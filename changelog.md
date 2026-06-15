@@ -31,6 +31,13 @@ Information about updates will appear here.
 
 ---
 
+## [2.1.0] - 15.06.2026
+- Now CSSim is standalone! The app now uses Express, so XAMPP is no longer required.
+- Some packages have been updated to ensure better compatibility.
+- One value in the technical demo contained a typo. It has been corrected.
+
+---
+
 ## [2.0.0] - 06.06.2026
 
 ### 🚀 New Features & Improvements
