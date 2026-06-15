@@ -32,10 +32,11 @@ CSSim goes far beyond simple window resizing. Through its control panel, you can
 
 ---
 
-## 🚀 Installation
+## 🚀 Installation and Use
 
-1. Copy the `screen_emulator` folder into your local server root directory (e.g., XAMPP's `htdocs`).  
-2. Open a terminal inside the project root directory.  
-3. Install dependencies:
+1. Open a terminal inside `screen_emulator` directory.  
+2. Install dependencies:
    ```bash
    npm install
+3. Put your files in `screen_emulator/projects`.
+4. Whenever you make changes to the files, click the Render button.
