@@ -32,6 +32,28 @@ Information about updates will appear here.
 
 ---
 
+## [2.1.1] - 03.07.2026
+- A link to <a href="https://github.com/opaczynski/ConeFig.git">ConeFig</a> has been added. Below is an example of the benefits of my program. SVG filters are much less accurate than my shaders, which are based on scientific research.
+- Added 4:3, 16:9, and 21:9 device options for color blindness (graphics based on tritanopia).
+<br><br>
+<details>
+<summary><h3>🖼 Examples of shader effects (Click to expand)</h3></summary>
+
+<h3 align="center">Original:</h3>
+<p align="center"><img width="50%" alt="playing_with_dog" src="https://github.com/user-attachments/assets/4343c9c0-1172-4d51-bcc2-3b16d4a6542a" /></p>
+<h3 align="center">Deuteranopia:</h3>
+<p align="center"><img width="50%" alt="deuteranopia_" src="https://github.com/user-attachments/assets/a78919c8-0d92-4254-b1fc-9fdbf27f71f8" /></p>
+<h3 align="center">Tritanopia:</h3>
+<p align="center"><img width="50%" alt="tritanopia_" src="https://github.com/user-attachments/assets/3815a04a-88fb-4db1-9346-9966f8c64d00" /></p>
+<h3 align="center">Monochromatism (M):</h3>
+<p align="center"><img width="50%" alt="monochromatism_" src="https://github.com/user-attachments/assets/443a2360-c525-407d-be9c-9411fd556547" /></p>
+<h3 align="center">Rod monochromacy:</h3>
+<p align="center"><img width="50%" alt="rod_monochromatism_" src="https://github.com/user-attachments/assets/88c85d2b-739c-4602-9022-cc61c0e612c0" /></p>
+
+</details>
+
+---
+
 ## [2.1.0] - 15.06.2026
 - Now CSSim is standalone! The app now uses Express, so XAMPP is no longer required.
 - Some packages have been updated to ensure better compatibility.
