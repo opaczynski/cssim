@@ -2,13 +2,20 @@ const { app, BrowserWindow, ipcMain, screen, session } = require("electron");
 const path = require("path");
 const fs = require("fs");
 const express = require("express");
+const { spawn } = require("child_process");
 
-const { copyProjectToRender, analyzeMediaQueries, transformAllCSS, appendScriptToAllHTMLFilesInRender } = require("./render");
+const {
+    copyProjectToRender,
+    analyzeMediaQueries,
+    transformAllCSS,
+    appendScriptToAllHTMLFilesInRender,
+} = require("./render");
 
 let newWin1 = null;
 let originalWidth = null;
 let originalHeight = null;
 let watchInterval = null;
+let phpProcess = null;
 
 const server = express();
 const PORT = 3000;
@@ -16,10 +23,35 @@ server.use(express.static(app.getAppPath()));
 server.listen(PORT, "127.0.0.1", () => {
     console.log(`Localhost running on http://127.0.0.1:${PORT}`);
 });
+function startPhpServer() {
+    const phpPort = 8000;
+    const documentRoot = app.getAppPath();
+
+    console.log(`Starting built-in PHP server on http://127.0.0.1:${phpPort}`);
+    phpProcess = spawn("php", [
+        "-S",
+        `127.0.0.1:${phpPort}`,
+        "-t",
+        documentRoot,
+    ]);
+
+    phpProcess.stdout.on("data", (data) => {
+        console.log(`PHP STDOUT: ${data}`);
+    });
+
+    phpProcess.stderr.on("data", (data) => {
+        console.error(`PHP STDERR: ${data}`);
+    });
+
+    phpProcess.on("close", (code) => {
+        console.log(`PHP process exited with code: ${code}`);
+    });
+}
 
 function centerWindow(width, height) {
     if (!newWin1) return;
-    const { width: screenWidth, height: screenHeight } = screen.getPrimaryDisplay().workAreaSize;
+    const { width: screenWidth, height: screenHeight } =
+        screen.getPrimaryDisplay().workAreaSize;
     const x = Math.floor((screenWidth - width) / 2);
     const y = Math.floor((screenHeight - height) / 2);
     newWin1.setBounds({ x, y, width, height });
@@ -72,7 +104,7 @@ ipcMain.handle("append-script-to-html", async () => {
         await appendScriptToAllHTMLFilesInRender();
         return true;
     } catch (e) {
-        console.error("Błąd dopisywania skryptu:", e);
+        console.error("Failed to append script:", e);
         return false;
     }
 });
@@ -91,7 +123,11 @@ ipcMain.handle("save-json", async (_event, updates) => {
     }
 });
 
-const cssFilePath = path.join(__dirname, "emulator", "environment-variables.css");
+const cssFilePath = path.join(
+    __dirname,
+    "emulator",
+    "environment-variables.css",
+);
 
 let cssVariables = {
     "--emulator-safe-area-inset-left": "0",
@@ -141,6 +177,9 @@ ipcMain.handle("get-css-variables", () => {
 
 app.whenReady().then(() => {
     session.defaultSession.clearCache();
+
+    startPhpServer();
+
     const mainWindow = new BrowserWindow({
         width: 600,
         height: 350,
@@ -150,10 +189,11 @@ app.whenReady().then(() => {
             preload: path.join(__dirname, "preload.js"),
             contextIsolation: true,
             nodeIntegration: false,
-            devTools: true,
+            devTools: false,
         },
     });
     mainWindow.loadURL(`http://127.0.0.1:${PORT}/emulator/index.html`);
+
     ipcMain.handle("open-bend-window", async (event, options) => {
         session.defaultSession.clearCache();
         const { width, height, bend, mod } = options;
@@ -166,7 +206,12 @@ app.whenReady().then(() => {
                 preload: path.join(__dirname, "preload.js"),
                 contextIsolation: true,
                 nodeIntegration: false,
-                additionalArguments: [`--bend=${bend}`, `--width=${width}`, `--height=${height}`, `--mod=${mod}`],
+                additionalArguments: [
+                    `--bend=${bend}`,
+                    `--width=${width}`,
+                    `--height=${height}`,
+                    `--mod=${mod}`,
+                ],
             },
         });
         newWin1.loadURL(`http://127.0.0.1:${PORT}/emulator/screen.html`);
@@ -179,7 +224,9 @@ app.whenReady().then(() => {
         const dir = path.join(__dirname, "skins");
         const files = fs.readdirSync(dir);
         return files.filter((file) => {
-            return [".png", ".webp", ".gif", ".avif", ".tiff", ".svg"].includes(path.extname(file).toLowerCase());
+            return [".png", ".webp", ".gif", ".avif", ".tiff", ".svg"].includes(
+                path.extname(file).toLowerCase(),
+            );
         });
     });
     ipcMain.handle("get-presets", async () => {
@@ -197,4 +244,16 @@ app.whenReady().then(() => {
         newWin1.setSize(h, w);
         centerWindow(h, w);
     });
+});
+app.on("will-quit", () => {
+    if (phpProcess) {
+        console.log("Closing PHP server...");
+        phpProcess.kill();
+    }
+});
+
+app.on("window-all-closed", () => {
+    if (process.platform !== "darwin") {
+        app.quit();
+    }
 });

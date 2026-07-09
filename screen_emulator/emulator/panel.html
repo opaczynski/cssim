@@ -45,7 +45,13 @@
         </style>
     </head>
     <body>
-        <input type="range" min="1" max="360" value="180" id="fold_degree_slider" />
+        <input
+            type="range"
+            min="1"
+            max="360"
+            value="180"
+            id="fold_degree_slider"
+        />
         <input type="number" value="360" id="fold_degree_number" />
         <script>
             let y = 0;
@@ -54,8 +60,10 @@
             let window_orientation;
             let viewport_width;
             let viewport_height;
-            let fold_degree_slider = document.getElementById("fold_degree_slider");
-            let fold_degree_number = document.getElementById("fold_degree_number");
+            let fold_degree_slider =
+                document.getElementById("fold_degree_slider");
+            let fold_degree_number =
+                document.getElementById("fold_degree_number");
             let data = {
                 device_posture: "continuous",
                 screen_fold_posture: "flat",
@@ -69,25 +77,37 @@
                         data.device_posture = "folded";
                     }
                     data.screen_fold_angle = fold_degree_slider.value + "deg";
-                    if (fold_degree_slider.value >= 1 && fold_degree_slider.value <= 140) {
+                    if (
+                        fold_degree_slider.value >= 1 &&
+                        fold_degree_slider.value <= 140
+                    ) {
                         console.log(window_orientation);
                         if (window_orientation == "portrait") {
                             data.screen_fold_posture = "laptop";
                         } else if (window_orientation == "landscape") {
                             data.screen_fold_posture = "book";
                         }
-                    } else if (fold_degree_slider.value >= 141 && fold_degree_slider.value <= 185) {
+                    } else if (
+                        fold_degree_slider.value >= 141 &&
+                        fold_degree_slider.value <= 185
+                    ) {
                         data.screen_fold_posture = "flat";
-                    } else if (fold_degree_slider.value >= 186 && fold_degree_slider.value <= 335) {
+                    } else if (
+                        fold_degree_slider.value >= 186 &&
+                        fold_degree_slider.value <= 335
+                    ) {
                         data.screen_fold_posture = "tent";
-                    } else if (fold_degree_slider.value >= 336 && fold_degree_slider.value <= 360) {
+                    } else if (
+                        fold_degree_slider.value >= 336 &&
+                        fold_degree_slider.value <= 360
+                    ) {
                         data.screen_fold_posture = "tablet";
                     }
                 }
                 sendData();
             }
             function sendData() {
-                fetch("http://localhost:3000/emulator/panel.php", {
+                fetch("http://localhost:8000/emulator/panel.php", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -98,7 +118,7 @@
             sendData();
 
             function fetchJsonData() {
-                fetch("http://localhost:3000/emulator/panel_get_data.php")
+                fetch("http://localhost:8000/emulator/panel_get_data.php")
                     .then((response) => response.json())
                     .then((data) => {
                         fold_degree_slider.max = data.screen_fold_api_max;
@@ -130,7 +150,10 @@
                 if (fold_degree_number.value == 0) {
                     fold_degree_number.value = 1;
                 }
-                if (fold_degree_number.value > parseFloat(fold_degree_slider.max)) {
+                if (
+                    fold_degree_number.value >
+                    parseFloat(fold_degree_slider.max)
+                ) {
                     fold_degree_number.value = fold_degree_slider.max;
                 }
             }
