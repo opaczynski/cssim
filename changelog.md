@@ -32,8 +32,9 @@ Information about updates will appear here.
 
 ---
 
-## [2.1.1] - 03.07.2026
+## [2.1.1] - 08.07.2026
 - A link to <a href="https://github.com/opaczynski/ConeFig.git">ConeFig</a> has been added. Below is an example of the benefits of my program. SVG filters are much less accurate than my shaders, which are based on scientific research.
+- Some Express bugs have been fixed.
 - Added 4:3, 16:9, and 21:9 device options for color blindness (graphics based on tritanopia).
 <br><br>
 <details>
