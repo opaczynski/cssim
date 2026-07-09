@@ -28,7 +28,8 @@ CSSim goes far beyond simple window resizing. Through its control panel, you can
 
 ## ⚙️ Requirements
 
-- [Node.js & npm](https://nodejs.org/)  
+- [Node.js & npm](https://nodejs.org/)
+- [PHP CLI](https://www.php.net/downloads.php)
 
 ---
 
