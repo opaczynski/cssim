@@ -35,9 +35,9 @@ CSSim goes far beyond simple window resizing. Through its control panel, you can
 
 ## 🚀 Installation and Use
 
-1. Open a terminal inside `screen_emulator` directory.  
+1. Open a terminal inside `cssim` directory.  
 2. Install dependencies:
    ```bash
    npm install
-3. Put your files in `screen_emulator/projects`.
+3. Put your files in `cssim/projects`.
 4. Whenever you make changes to the files, click the Render button.
